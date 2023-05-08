@@ -63,7 +63,21 @@ const localdb = {
 
   validatePassword: () => {
     return true
-  }
+  },
+
+  Messages: class Messages {
+    static findById () {}
+    static find () {}
+    static findOne () {}
+
+    async save () {
+      return {}
+    }
+  }, 
 }
 
-export default { ipfs, localdb };
+const nodemailer = {
+  sendEmail: async () => {}
+}
+
+export default { ipfs, localdb, nodemailer };

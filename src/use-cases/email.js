@@ -38,7 +38,7 @@ class EmailUseCases {
 
       // Get message signals from the blockchain.
       const messages = await this.msgLib.memo.readMsgSignal(cashAddress)
-      // console.log(`messages: ${JSON.stringify(messages, null, 2)}`)
+      console.log(`messages: ${JSON.stringify(messages, null, 2)}`)
 
       // Filter out sent messages, so user only sees recieved messages.
       const receiveMessages = this.filterMessages(cashAddress, messages)
@@ -46,7 +46,7 @@ class EmailUseCases {
         console.log('No Messages Found!')
         return false
       }
-      // console.log('receiveMessages: ', receiveMessages)
+      console.log('receiveMessages: ', receiveMessages)
 
       // Loop through all the found messages
       for (let i = 0; i < receiveMessages.length; i++) {
@@ -54,7 +54,7 @@ class EmailUseCases {
 
         // Check messages against database.
         const msgFoundInDb = await this.adapters.localdb.Messages.findOne({ txid: thisMsg.txid })
-        // console.log(`msgFoundInDb: ${JSON.stringify(msgFoundInDb, null, 2)}`)
+        console.log(`msgFoundInDb: ${JSON.stringify(msgFoundInDb, null, 2)}`)
 
         // If message is not in database, then send email notification.
         if (!msgFoundInDb) {
@@ -77,6 +77,8 @@ class EmailUseCases {
           await newMsg.save()
         }
       }
+
+      return true
     } catch (err) {
       console.error('Error in checkMessages(): ', err)
       throw err
