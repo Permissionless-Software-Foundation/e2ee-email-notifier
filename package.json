@@ -2,10 +2,10 @@
   "name": "e2ee-email-notifier",
   "version": "1.0.0",
   "description": "Detects new e2ee messages and sends an email notification when they are detected.",
-  "main": "index.js",
+  "main": "e2ee-email-notifier.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node e2ee-email-notifier.js",
     "test": "npm run test:all",
     "test:all": "export SVC_ENV=test && c8 --reporter=text mocha --exit --timeout 15000 --recursive test/unit test/e2e/automated/",
     "test:unit": "export SVC_ENV=test && mocha --exit --timeout 15000 --recursive test/unit/",
