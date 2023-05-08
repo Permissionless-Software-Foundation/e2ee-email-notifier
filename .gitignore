@@ -66,5 +66,6 @@ orbitdb
 ipfsdata
 .ipfsdata
 data/
+e2ee-email-notifier.sh
 
 !README.md

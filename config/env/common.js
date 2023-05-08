@@ -22,7 +22,7 @@ const ipfsCoordName = process.env.COORD_NAME
 
 export default {
   // Configure TCP port.
-  port: process.env.PORT || 5020,
+  port: process.env.PORT || 5022,
 
   // Password for HTML UI that displays logs.
   logPass: 'test',
@@ -96,5 +96,9 @@ export default {
     ? parseInt(process.env.IPFS_API_PORT)
     : 5001,
 
-  chatPubSubChan: 'psf-ipfs-chat-001'
+  chatPubSubChan: 'psf-ipfs-chat-001',
+
+  // Customize these variables for your own store.
+  merchantAddr: 'bitcoincash:qqstpfgfy2rdsgg4ruu29qdycu3nkax9fsaj27ayrs',
+  merchantEmail: 'test@bchtest.net'
 }

@@ -27,34 +27,35 @@ class TimerControllers {
     this.config = config
 
     // Bind 'this' object to all subfunctions.
-    this.exampleTimerFunc = this.exampleTimerFunc.bind(this)
+    this.checkMessages = this.checkMessages.bind(this)
 
-    this.startTimers()
+    // this.startTimers()
   }
 
   // Start all the time-based controllers.
   startTimers () {
     // Any new timer control functions can be added here. They will be started
     // when the server starts.
-    this.optimizeWalletHandle = setInterval(this.exampleTimerFunc, 60000 * 10)
+    this.checkMessagesHandle = setInterval(this.checkMessages, 60000 * 5)
 
     return true
   }
 
   stopTimers () {
-    clearInterval(this.optimizeWalletHandle)
+    clearInterval(this.checkMessagesHandle)
   }
 
   // Replace this example function with your own timer handler.
-  exampleTimerFunc (negativeTest) {
+  async checkMessages () {
     try {
-      console.log('Example timer controller executed.')
+      const now = new Date()
+      console.log(`checkMessages() timer controller executed at ${now.toLocaleString()}`)
 
-      if (negativeTest) throw new Error('test error')
+      await this.useCases.email.checkMessages()
 
       return true
     } catch (err) {
-      console.error('Error in exampleTimerFunc(): ', err)
+      console.error('Error in checkMessages(): ', err)
 
       // Note: Do not throw an error. This is a top-level function.
       return false

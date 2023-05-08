@@ -31,12 +31,19 @@ class UserUseCaseMock {
   }
 }
 
+class EmailUseCaseMock {
+  async checkMessages() {
+    return true
+  }
+}
+
 class UseCasesMock {
   constuctor(localConfig = {}) {
     // this.user = new UserUseCaseMock(localConfig)
   }
 
   user = new UserUseCaseMock()
+  email = new EmailUseCaseMock()
 }
 
 export default UseCasesMock;

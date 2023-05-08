@@ -3,6 +3,7 @@
 */
 
 'use strict'
+
 import nodemailer from 'nodemailer'
 
 import config from '../../config/index.js'
@@ -21,6 +22,8 @@ class NodeMailer {
 
   // Define an email server 'transport' for nodemailer
   createTransporter () {
+    console.log(`Email server: ${_this.config.emailServer}`)
+
     const transporter = _this.nodemailer.createTransport({
       host: _this.config.emailServer,
       port: 587,
@@ -36,6 +39,8 @@ class NodeMailer {
   // Handles the sending of data via email.
   async sendEmail (data) {
     try {
+      console.log('sendEmail() data: ', data)
+
       // Validate input
       if (!data.email || typeof data.email !== 'string') {
         throw new Error("Property 'email' must be a string!")
@@ -74,7 +79,7 @@ class NodeMailer {
 
       return info
     } catch (err) {
-      wlogger.error('Error in lib/nodemailer.js/sendEmail()')
+      wlogger.error('Error in lib/nodemailer.js/sendEmail(): ', err)
       throw err
     }
   }
