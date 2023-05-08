@@ -23,14 +23,22 @@ npm install
 npm start
 ```
 
+## Configuration
+
+- Create a bash sell script called `e2ee-email-notifier.sh`. You can use [e2ee-email-notifier-example.sh](./e2ee-email-notifier-example.sh) as a template.
+  - Customize that file with the login details for your email server.
+- Edit [these lines in the config file](https://github.com/Permissionless-Software-Foundation/e2ee-email-notifier/blob/5e232453d2df49baf18e6f593176801c56e98dac/config/env/common.js#L101-L103) with the BCH address that will receive e2ee messages, and the email address you want the notifications sent to.
+
 ## Usage
 
 - `npm start` Start server on live mode
 - `npm run docs` Generate API documentation
 - `npm test` Run mocha tests
-- `docker-compose build` Build a 'production' Docker container
-- `docker-compose up` Run the docker container
 
 ## License
 
 [MIT](./LICENSE.md)
+
+## Handy Links
+
+[Pedigree](./PEDIGREE.md) - Explanation of the previous open source repositories that were used to build this one.
