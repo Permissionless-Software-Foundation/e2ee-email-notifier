@@ -99,5 +99,6 @@ export default {
   chatPubSubChan: 'psf-ipfs-chat-001',
 
   // Customize these variables for your own store.
-  merchantAddr: 'bitcoincash:qqstpfgfy2rdsgg4ruu29qdycu3nkax9fsaj27ayrs'
+  merchantAddr: 'bitcoincash:qqstpfgfy2rdsgg4ruu29qdycu3nkax9fsaj27ayrs',
+  merchantEmail: 'test@bchtest.net'
 }

@@ -36,7 +36,7 @@ class TimerControllers {
   startTimers () {
     // Any new timer control functions can be added here. They will be started
     // when the server starts.
-    this.checkMessagesHandle = setInterval(this.checkMessages, 60000 * 0.5)
+    this.checkMessagesHandle = setInterval(this.checkMessages, 60000 * 5)
 
     return true
   }
@@ -48,7 +48,8 @@ class TimerControllers {
   // Replace this example function with your own timer handler.
   async checkMessages () {
     try {
-      console.log('checkMessages() timer controller executed.')
+      const now = new Date()
+      console.log(`checkMessages() timer controller executed at ${now.toLocaleString()}`)
 
       await this.useCases.email.checkMessages()
 

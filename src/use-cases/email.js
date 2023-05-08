@@ -12,7 +12,6 @@ import MsgLib from 'bch-message-lib'
 // import wlogger from '../adapters/wlogger.js'
 import config from '../../config/index.js'
 
-
 class EmailUseCases {
   constructor (localConfig = {}) {
     // console.log('User localConfig: ', localConfig)
@@ -27,7 +26,7 @@ class EmailUseCases {
     this.config = config
     // this.MsgLib = MsgLib
     // this.BchWallet = BchWallet
-    this.wallet = new BchWallet(undefined, { interface: 'consumer-api'})
+    this.wallet = new BchWallet(undefined, { interface: 'consumer-api' })
     this.msgLib = new MsgLib({ wallet: this.wallet })
   }
 
@@ -50,26 +49,34 @@ class EmailUseCases {
       // console.log('receiveMessages: ', receiveMessages)
 
       // Loop through all the found messages
-      for(let i=0; i < receiveMessages.length; i++) {
+      for (let i = 0; i < receiveMessages.length; i++) {
         const thisMsg = receiveMessages[i]
 
         // Check messages against database.
-        const msgFoundInDb = await this.adapters.localdb.Messages.findOne({txid: thisMsg.txid})
+        const msgFoundInDb = await this.adapters.localdb.Messages.findOne({ txid: thisMsg.txid })
         // console.log(`msgFoundInDb: ${JSON.stringify(msgFoundInDb, null, 2)}`)
 
         // If message is not in database, then send email notification.
-        if(!msgFoundInDb) {
+        if (!msgFoundInDb) {
           console.log('New message found! thisMsg: ', thisMsg)
 
           // Send email notification.
+          const emailData = {
+            email: 'noreply@nowhere.com',
+            to: [this.config.merchantEmail],
+            subject: 'New e2ee message recieved',
+            formMessage: 'New e2ee message recieved',
+            htmlData: '<p>Message: New e2ee message recieved</p>'
+          }
+          await this.adapters.nodemailer.sendEmail(emailData)
+          const now = new Date()
+          console.log(`New e2ee message detected. Sent alert email at ${now.toLocaleString()}`)
 
           // Add message to the database.
-          const newMsg = new this.adapters.localdb.Messages({txid: thisMsg.txid})
+          const newMsg = new this.adapters.localdb.Messages({ txid: thisMsg.txid })
           await newMsg.save()
         }
       }
-
-      
     } catch (err) {
       console.error('Error in checkMessages(): ', err)
       throw err
