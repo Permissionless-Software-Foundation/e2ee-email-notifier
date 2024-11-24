@@ -67,5 +67,8 @@ ipfsdata
 .ipfsdata
 data/
 e2ee-email-notifier.sh
+run-dev.sh
 
 !README.md
+
+wallet.json
